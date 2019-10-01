@@ -7,8 +7,9 @@ Compute accurate Moon positions using the semi-analytical lunar solution ELP2000
 ## Installation ##
 
 This package can be installed using `pip install elp-mpp02`.  You will need to manually download the six data
-files `ELP_MAIN/PERT.S1/2/3` from ftp://cyrano-se.obspm.fr/pub/2_lunar_solutions/2_elpmpp02 and save them in a
-directory of your choice.
+files `ELP_MAIN/PERT.S1/2/3` from
+[ftp://cyrano-se.obspm.fr/pub/2_lunar_solutions/2_elpmpp02](ftp://cyrano-se.obspm.fr/pub/2_lunar_solutions/2_elpmpp02)
+and save them in a directory of your choice.
 
 
 ## Using the package ##
