@@ -1,0 +1,4 @@
+elp_mpp02
+fortranformat==1.0.1
+numpy
+sphinx-rtd-theme
