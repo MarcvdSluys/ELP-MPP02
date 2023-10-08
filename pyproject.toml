@@ -6,8 +6,8 @@ build-backend = "setuptools.build_meta"
 py-modules = []
 
 [project]
-name = "elp-mpp02"
-version = "0.0.1"
+name = "elp_mpp02"
+version = "0.0.2"
 authors = [ { name="Marc van der Sluys", email="git@vandersluys.nl" } ]
 description = "Accurate Moon positions using the Lunar solution ELP/MPP02 in Python"
 readme   = "README.md"
