@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []
+
+[project]
+name = "elp-mpp02"
+version = "0.0.1"
+authors = [ { name="Marc van der Sluys", email="git@vandersluys.nl" } ]
+description = "Accurate Moon positions using the Lunar solution ELP/MPP02 in Python"
+readme   = "README.md"
+license  = {text = "GPLv3+"}
+keywords = ["Moon","astronomy","ephemeris"]
+dependencies = ["numpy","fortranformat"]
+
+# See: https://pypi.org/pypi?:action=list_classifiers
+classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Education",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Topic :: Scientific/Engineering :: Astronomy",
+    ]
+
+[project.urls]
+GitHub = "https://github.com/MarcvdSluys/ELP-MPP02"
