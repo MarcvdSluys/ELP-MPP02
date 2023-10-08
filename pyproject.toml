@@ -7,7 +7,7 @@ py-modules = []
 
 [project]
 name = "elp_mpp02"
-version = "0.0.2"
+version = "0.0.3"
 authors = [ { name="Marc van der Sluys", email="git@vandersluys.nl" } ]
 description = "Accurate Moon positions using the Lunar solution ELP/MPP02 in Python"
 readme   = "README.md"
@@ -30,3 +30,4 @@ classifiers = [
 
 [project.urls]
 GitHub = "https://github.com/MarcvdSluys/ELP-MPP02"
+ReadTheDocs = "https://readthedocs.org/projects/elp-mpp02/"
