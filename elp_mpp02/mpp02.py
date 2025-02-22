@@ -58,10 +58,10 @@ Acknowledgements:
 """
 
 
-##############################################################################################################
 import math as m
 import numpy.core as np
 import sys
+
 
 # Global constants:
 d2r    = m.radians(1)  # Degrees to radians
@@ -71,6 +71,7 @@ pi     = m.pi
 pi2    = pi*2
 pio2   = pi/2
 jd2000 = 2451545
+
 
 # Global variables:
 modeInit = 999  # := uninitialised
@@ -94,8 +95,6 @@ p    = np.zeros((8,5))
 delnu=0.; dele=0.; delg=0.; delnp=0.; delep=0.; dtasm=0.; am=0.
 
 
-
-##############################################################################################################
 def initialise_and_read_files(mode=0):
     """Initialise ELP/MPP02 constants and read the data files if necessary
     
@@ -107,24 +106,23 @@ def initialise_and_read_files(mode=0):
     """
     
     global modeInit
-    #print("Initialise and read files:", modeInit)
+    # print("Initialise and read files:", modeInit)
     
     # Initializing of constants and reading the files:
     ierr = 0
-    if(mode!=modeInit):
+    if mode!=modeInit:
         initialise(mode)
         ierr = read_files()
-        if(ierr!=0): return ierr
+        if ierr!=0: return ierr
         
         modeInit = mode  # Indicate that the data have been initialised
-        #print("modeInit:", modeInit)
+        # print("modeInit:", modeInit)
         return ierr
         
     return ierr
 
 
 
-##############################################################################################################
 def initialise(mode=0):
     """Initialization of the constants and parameters used for the evaluation of the ELP/MPP02 series
     
@@ -138,7 +136,7 @@ def initialise(mode=0):
     
     global modeInit,  w,eart,peri, dela,zeta,  p,delnu,dele,delg,delnp,delep,dtasm,am
     global p1,p2,p3,p4,p5, q1,q2,q3,q4,q5
-    #print("Initialise:", modeInit)
+    # print("Initialise:", modeInit)
     
     Dprec = -0.29965  # Constant for the correction to the constant of precession - source: IAU 2000A
     
@@ -150,7 +148,7 @@ def initialise(mode=0):
         [  0.50928e-4,   -0.37342e-4   ]
     ])  # (2,5)
     
-    if(mode<0 or mode>1): sys.exit('elp_mpp02.mpp02.initialise(): mode must have value 0 or 1, not %i' % mode)
+    if mode<0 or mode>1: sys.exit('elp_mpp02.mpp02.initialise(): mode must have value 0 or 1, not %i' % mode)
     
     # Constants for the evaluation of the partial derivatives:
     am     =  0.074801329           # Ratio of the mean motions (EMB / Moon)
@@ -160,7 +158,7 @@ def initialise(mode=0):
     
     
     # Corrections to constants:
-    if(mode==0):  # LLR
+    if mode==0:  # LLR
         # Values of the corrections to the constants fitted to LLR.  Fit 13-05-02 (2 iterations) except Phi
         # and eps w2_1 and w3_1.  See ELPdoc, Table 3 and paper, Table 1
         Dw1_0   = -0.10525
@@ -231,16 +229,16 @@ def initialise(mode=0):
     
     # Corrections to the secular terms of Moon angles.  This gives a better (long-term?) fit
     #   to DE 406.  See ELPdoc, Table 6/paper, Table 4, line 2:
-    if(mode==1):  # DE 405 / DE 406
-       w[0,3] -= 0.00018865/r2as
-       w[0,4] -= 0.00001024/r2as
-       
-       w[1,2] += 0.00470602/r2as
-       w[1,3] -= 0.00025213/r2as
-       
-       w[2,2] -= 0.00261070/r2as
-       w[2,3] -= 0.00010712/r2as
-
+    if mode==1:  # DE 405 / DE 406
+        w[0,3] -= 0.00018865/r2as
+        w[0,4] -= 0.00001024/r2as
+        
+        w[1,2] += 0.00470602/r2as
+        w[1,3] -= 0.00025213/r2as
+        
+        w[2,2] -= 0.00261070/r2as
+        w[2,3] -= 0.00010712/r2as
+    
     
     # Corrections to the mean motions of the Moon angles W2 and W3, infered from the modifications of the
     # constants:
@@ -269,10 +267,10 @@ def initialise(mode=0):
     
     # Arguments of Delaunay:
     for iD in range(5):
-       dela[0,iD] = w[0,iD]  - eart[iD]                 # D   =  W1 - Te + 180 degrees
-       dela[1,iD] = w[0,iD]  - w[2,iD]                  # F   =  W1 - W3
-       dela[2,iD] = w[0,iD]  - w[1,iD]                  # l   =  W1 - W2   mean anomaly of the Moon
-       dela[3,iD] = eart[iD] - peri[iD]                 # l'  =  Te - Pip  mean anomaly of EMB
+        dela[0,iD] = w[0,iD]  - eart[iD]                 # D   =  W1 - Te + 180 degrees
+        dela[1,iD] = w[0,iD]  - w[2,iD]                  # F   =  W1 - W3
+        dela[2,iD] = w[0,iD]  - w[1,iD]                  # l   =  W1 - W2   mean anomaly of the Moon
+        dela[3,iD] = eart[iD] - peri[iD]                 # l'  =  Te - Pip  mean anomaly of EMB
     
     dela[0,0] += pi
     
@@ -332,8 +330,6 @@ def initialise(mode=0):
     return
   
   
-
-##############################################################################################################
 def read_files():
     """Read the six data files containing the ELP/MPP02 series
     
@@ -343,7 +339,7 @@ def read_files():
     
     """
     
-    #print("Read files:")
+    # print("Read files:")
     global nmpb,cmpb,fmpb, nper,cper,fper
     global w,eart,peri, dela,zeta,  p,delnu,dele,delg,delnp,delep,dtasm,am
     
@@ -352,8 +348,8 @@ def read_files():
     ilu = np.zeros(4)  # will contain ints
     a   = 0.
     b   = np.zeros(5)
-    #ierr=1
-    #nerr=0
+    # ierr=1
+    # nerr=0
     
     import fortranformat as ff
     formatMainHeader = ff.FortranRecordReader('(25x,I10)')              # Block header format
@@ -364,8 +360,9 @@ def read_files():
         fileName = dataDir+'/ELP_MAIN.S'+str(iFile+1)
         try:
             inFile = open(fileName,'r')
-        except:
-            sys.stderr.write('Error opening file.  Please ensure that: '+fileName+'\n')
+        except Exception as err:
+            sys.stderr.write(str(err)+'\n\n')
+            sys.stderr.write('Please ensure that:\n')
             sys.stderr.write(' 1) you downloaded the data files ELP_*.S[123] from '+
                              'ftp://cyrano-se.obspm.fr/pub/2_lunar_solutions/2_elpmpp02/\n')
             sys.stderr.write(' 2) you set the variable mpp.dataDir to the correct value\n')
@@ -373,7 +370,7 @@ def read_files():
         
         line = inFile.readline()
         nmpb[iFile,0] = formatMainHeader.read(line)[0]
-        #if(nerr!=0): return 3
+        # if nerr!=0: return 3
         
         nmpb[iFile,1] = ir+1
         nmpb[iFile,2] = nmpb[iFile,0] + nmpb[iFile,1] - 1
@@ -382,10 +379,10 @@ def read_files():
         for iLine in range(nLines):
             line = inFile.readline()
             ilu[0],ilu[1],ilu[2],ilu[3], a, b[0],b[1],b[2],b[3],b[4] = formatMainBody.read(line)
-            #if(nerr!=0): return 4
+            # if nerr!=0: return 4
             
             tgv = b[0] + dtasm*b[4]
-            if(iFile==2):  a -= 2*a*delnu/3
+            if iFile==2:  a -= 2*a*delnu/3
             cmpb[ir] = a + tgv*(delnp-am*delnu) + b[1]*delg + b[2]*dele + b[3]*delep
             
             for k in range(5):
@@ -393,7 +390,7 @@ def read_files():
                 for i in range(4):
                     fmpb[k,ir] += ilu[i] * dela[i,k]
                     
-            if(iFile==2): fmpb[0,ir] += pio2
+            if iFile==2: fmpb[0,ir] += pio2
             ir += 1
             
         inFile.close()
@@ -414,33 +411,33 @@ def read_files():
         fileName = dataDir+'/ELP_PERT.S'+str(iFile+1)
         try:
             inFile = open(fileName,'r')
-        except:
-            sys.stderr.write('Error opening file: '+fileName+'\n')
+        except Exception as err:
+            sys.stderr.write(str(err)+'\n')
             exit(1)
             
         for it in range(4):
-            #if(nerr!=0): return 6
+            # if nerr!=0: return 6
             line = inFile.readline()
             nper[iFile,it,0],ipt = formatPertHeader.read(line)
             
             nper[iFile,it,1] = ir+1
             nper[iFile,it,2] = nper[iFile,it,0] + nper[iFile,it,1] - 1
-            if(nper[iFile,it,0]==0): continue  # cycle to next it
+            if nper[iFile,it,0]==0: continue  # cycle to next it
             
             nLines = int(round(nper[iFile,it,0]))
             for iLine in range(nLines):
                 line = inFile.readline()
                 ( icount,s,c,ifi[0],ifi[1],ifi[2],ifi[3],ifi[4],ifi[5],ifi[6],ifi[7],ifi[8],ifi[9],ifi[10], 
                   ifi[11],ifi[12],ifi[13],ifi[14],ifi[15] ) = formatPertBody.read(line)
-                #if(nerr!=0): return 7
+                # if nerr!=0: return 7
                 
                 cper[ir] = m.sqrt(c**2+s**2)
                 pha = m.atan2(c,s)
-                if(pha<0): pha = pha+pi2
+                if pha<0: pha = pha+pi2
                 
                 for k in range(5):
                     fper[k,ir] = 0
-                    if(k==0): fper[k,ir] = pha
+                    if k==0: fper[k,ir] = pha
                     for i in range(4):
                         fper[k,ir] += ifi[i] * dela[i,k]
                         
@@ -456,7 +453,6 @@ def read_files():
     
 
 
-##############################################################################################################
 def elp_dms2rad(deg,min,sec):
     """Function for the conversion sexagesimal degrees -> radians in initialise()"""
     
@@ -464,8 +460,6 @@ def elp_dms2rad(deg,min,sec):
 
 
 
-
-##############################################################################################################
 def compute_lbr(jd, mode=0):
     """Compute the spherical lunar coordinates using the ELP2000/MPP02 lunar theory in the dynamical mean ecliptic
           and equinox of J2000.
@@ -487,7 +481,7 @@ def compute_lbr(jd, mode=0):
 
     """
 
-    #print("Compute lbr:")
+    # print("Compute lbr:")
     
     xyz,vxyz, ierr = compute_xyz(jd, mode)
     
@@ -496,17 +490,15 @@ def compute_lbr(jd, mode=0):
     lon = m.atan2(xyz[1], xyz[0])
     lat = m.asin(xyz[2]/rad)
     
-    #rad = rad/1.49597870700e8  # km -> AU
+    # rad = rad/1.49597870700e8  # km -> AU
     
-    #print('jd, xyz: ', jd, xyz[0:3])
+    # print('jd, xyz: ', jd, xyz[0:3])
     # print(jd, (lon%pi2)*r2d, lat*r2d, rad)
     
     return lon,lat,rad
 
 
 
-  
-##############################################################################################################
 def compute_xyz(jd, mode=0):
     """Compute the rectangular lunar coordinates using the ELP/MPP02 lunar theory in the dynamical mean ecliptic
     and equinox of J2000.
@@ -528,7 +520,7 @@ def compute_xyz(jd, mode=0):
 
     """
     
-    #print("Compute xyz:")
+    # print("Compute xyz:")
     global nmpb,cmpb,fmpb, nper,cper,fper
     global w, p1,p2,p3,p4,p5, q1,q2,q3,q4,q5
     
@@ -539,7 +531,7 @@ def compute_xyz(jd, mode=0):
     
     # Initialise data and read files if needed:
     ierr = initialise_and_read_files(mode)
-    if(ierr!=0): sys.exit('Could not read ELP-MPP02 files')
+    if ierr!=0: sys.exit('Could not read ELP-MPP02 files')
     
     
     # Initialization of time powers:
@@ -580,7 +572,7 @@ def compute_xyz(jd, mode=0):
                 y = fper[0,iLine]
                 xp = 0
                 yp = 0
-                if(it!=0): xp = it * x * t[it-1]
+                if it!=0: xp = it * x * t[it-1]
                 
                 for k in range(1,5):  # k=1,4
                     y  +=     fper[k,iLine] * t[k]
@@ -597,8 +589,8 @@ def compute_xyz(jd, mode=0):
     
     # v[0] = v[0] % pi2
     
-    #print('t: ', t[0],t[1],t[2],t[3],t[4])
-    #print('v:       ', v[0]*r2d,v[1]*r2d,v[2], v[3],v[4],v[5])
+    # print('t: ', t[0],t[1],t[2],t[3],t[4])
+    # print('v:       ', v[0]*r2d,v[1]*r2d,v[2], v[3],v[4],v[5])
     
     # compute the rectangular coordinates (for the EoD?):
     clamb  = m.cos(v[0])
@@ -607,13 +599,13 @@ def compute_xyz(jd, mode=0):
     sbeta  = m.sin(v[1])
     cw     = v[2]*cbeta
     sw     = v[2]*sbeta
-    #print("c/s l/b: ", clamb,slamb, cbeta,sbeta)
+    # print("c/s l/b: ", clamb,slamb, cbeta,sbeta)
     
     x0     = cw*clamb
     x1     = cw*slamb
     x2     = sw
-    #print("x1,x2,x3: ", x0,x1,x2)
-    #print("p,q: ", p1,p2,p3,p4,p5, q1,q2,q3,q4,q5)
+    # print("x1,x2,x3: ", x0,x1,x2)
+    # print("p,q: ", p1,p2,p3,p4,p5, q1,q2,q3,q4,q5)
     
     # Is this simply precession in rectangular coordinates to J2000?  From?
     pw     = (p1 + p2*t[1] + p3*t[2] + p4*t[3] + p5*t[4]) * t[1]
