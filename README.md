@@ -49,7 +49,7 @@ data must be reinitialised.
 * Copyright:  2019-2025 Marc van der Sluys, Department of Physics, Utrecht University and Nikhef (institute for high-energy physics and gravitational waves), Amsterdam (NL)
 * Contact:    https://marc.vandersluys.nl
 * Website:    [Github](https://github.com/MarcvdSluys/ELP-MPP02), [PyPI](https://pypi.org/project/elp_mpp02/)
-* Licence:    [GPLv3+](https://www.gnu.org/licenses/gpl.html)
+* Licence:    [EUPL 1.2](https://www.eupl.eu/1.2/en/)
 
 
 ## References ##
