@@ -52,6 +52,9 @@ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Ge
 You should have received a copy of the GNU General Public License along with this code.  If not, see 
 <http://www.gnu.org/licenses/>.
 
+
+Acknowledgements:
+- Thanks to A. Vähäkangas for reporting a bug.
 """
 
 
@@ -140,11 +143,11 @@ def initialise(mode=0):
     Dprec = -0.29965  # Constant for the correction to the constant of precession - source: IAU 2000A
     
     bp = np.array([
-        [ 0.311079095, -0.103837907],
-        [-0.4482398e-2, 0.668287e-3],
-        [-0.1102485e-2, -0.1298072e-2],
-        [ 0.1056062e-2, -0.178028e-3],
-        [ 0.50928e-4, -0.37342e-4]
+        [  0.311079095,  -0.103837907  ],
+        [ -0.4482398e-2,  0.668287e-3  ],
+        [ -0.1102485e-2, -0.1298072e-2 ],
+        [  0.1056062e-2, -0.178028e-3  ],
+        [  0.50928e-4,   -0.37342e-4   ]
     ])  # (2,5)
     
     if(mode<0 or mode>1): sys.exit('elp_mpp02.mpp02.initialise(): mode must have value 0 or 1, not %i' % mode)
