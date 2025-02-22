@@ -1,2 +1,2 @@
 fortranformat==1.0.1
-numpy==1.25.2
+numpy==2.2.3

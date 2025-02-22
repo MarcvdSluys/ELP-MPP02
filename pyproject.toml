@@ -7,7 +7,7 @@ packages = ["elp_mpp02"]
 
 [project]
 name = "elp_mpp02"
-version = "0.0.4"
+version = "0.0.5"
 authors = [ { name="Marc van der Sluys", email="git@vandersluys.nl" } ]
 description = "Accurate Moon positions using the Lunar solution ELP/MPP02 in Python"
 readme   = "README.md"
