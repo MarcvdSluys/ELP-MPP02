@@ -52,6 +52,11 @@ data must be reinitialised.
 * Licence:    [EUPL 1.2](https://www.eupl.eu/1.2/en/)
 
 
+## Acknowledgements ##
+
+* Thanks to A. Vähäkangas for bug reports!
+
+
 ## References ##
 
 * [Chapront & Francou (2003)](https://ui.adsabs.harvard.edu/abs/2003A%26A...404..735C/abstract)
